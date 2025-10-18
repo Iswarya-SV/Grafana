@@ -1,0 +1,614 @@
+{
+  "OWASPZAPReport": {
+    "site": {
+      "alerts": {
+        "alertitem": [
+          {
+            "pluginid": 10038,
+            "alertRef": "10038-1",
+            "alert": "Content Security Policy (CSP) Header Not Set",
+            "name": "Content Security Policy (CSP) Header Not Set",
+            "riskcode": 2,
+            "confidence": 3,
+            "riskdesc": "Medium (High)",
+            "confidencedesc": "High",
+            "desc": {
+              "p": "Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page — covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files."
+            },
+            "instances": {
+              "instance": [
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Account.action;jsessionid=3D765566F76A2D9C6F628C59E515FA2A?signonForm=",
+                  "method": "GET",
+                  "param": "",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": ""
+                },
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Catalog.action",
+                  "method": "GET",
+                  "param": "",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": ""
+                },
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Catalog.action?viewCategory=&categoryId=FISH",
+                  "method": "GET",
+                  "param": "",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": ""
+                }
+              ]
+            },
+            "count": 3,
+            "solution": {
+              "p": "Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header."
+            },
+            "otherinfo": "",
+            "reference": {
+              "p": [
+                "https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy",
+                "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+                "https://www.w3.org/TR/CSP/",
+                "https://w3c.github.io/webappsec-csp/",
+                "https://web.dev/articles/csp",
+                "https://caniuse.com/#feat=contentsecuritypolicy",
+                "https://content-security-policy.com/"
+              ]
+            },
+            "cweid": 693,
+            "wascid": 15,
+            "sourceid": 27
+          },
+          {
+            "pluginid": 10020,
+            "alertRef": "10020-1",
+            "alert": "Missing Anti-clickjacking Header",
+            "name": "Missing Anti-clickjacking Header",
+            "riskcode": 2,
+            "confidence": 2,
+            "riskdesc": "Medium (Medium)",
+            "confidencedesc": "Medium",
+            "desc": {
+              "p": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+            },
+            "instances": {
+              "instance": [
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Account.action;jsessionid=3D765566F76A2D9C6F628C59E515FA2A?signonForm=",
+                  "method": "GET",
+                  "param": "x-frame-options",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": ""
+                },
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Catalog.action",
+                  "method": "GET",
+                  "param": "x-frame-options",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": ""
+                },
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Catalog.action?viewCategory=&categoryId=FISH",
+                  "method": "GET",
+                  "param": "x-frame-options",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": ""
+                }
+              ]
+            },
+            "count": 3,
+            "solution": {
+              "p": [
+                "Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.",
+                "If you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy's \"frame-ancestors\" directive."
+              ]
+            },
+            "otherinfo": "",
+            "reference": {
+              "p": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options"
+            },
+            "cweid": 1021,
+            "wascid": 15,
+            "sourceid": 27
+          },
+          {
+            "pluginid": 3,
+            "alertRef": "3-3",
+            "alert": "Referer Exposes Session ID",
+            "name": "Referer Exposes Session ID",
+            "riskcode": 2,
+            "confidence": 2,
+            "riskdesc": "Medium (Medium)",
+            "confidencedesc": "Medium",
+            "desc": {
+              "p": "A hyperlink pointing to another host name was found. As session ID URL rewrite is used, it may be disclosed in referer header to external hosts."
+            },
+            "instances": {
+              "instance": {
+                "uri": "https://petstore.octoperf.com/actions/Account.action;jsessionid=3D765566F76A2D9C6F628C59E515FA2A?signonForm=",
+                "method": "GET",
+                "param": "",
+                "attack": "",
+                "evidence": "octoperf.com",
+                "otherinfo": ""
+              }
+            },
+            "count": 1,
+            "solution": {
+              "p": "This is a risk if the session ID is sensitive and the hyperlink refers to an external or third party host. For secure content, put session ID in secured session cookie."
+            },
+            "otherinfo": "",
+            "reference": {
+              "p": "https://seclists.org/webappsec/2002/q4/111"
+            },
+            "cweid": 200,
+            "wascid": 13,
+            "sourceid": 27
+          },
+          {
+            "pluginid": 3,
+            "alertRef": "3-2",
+            "alert": "Session ID in URL Rewrite",
+            "name": "Session ID in URL Rewrite",
+            "riskcode": 2,
+            "confidence": 3,
+            "riskdesc": "Medium (High)",
+            "confidencedesc": "High",
+            "desc": {
+              "p": "URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs."
+            },
+            "instances": {
+              "instance": {
+                "uri": "https://petstore.octoperf.com/actions/Account.action;jsessionid=3D765566F76A2D9C6F628C59E515FA2A?signonForm=",
+                "method": "GET",
+                "param": "",
+                "attack": "",
+                "evidence": "jsessionid=3D765566F76A2D9C6F628C59E515FA2A",
+                "otherinfo": ""
+              }
+            },
+            "count": 1,
+            "solution": {
+              "p": "For secure content, put session ID in a cookie. To be even more secure consider using a combination of cookie and URL rewrite."
+            },
+            "otherinfo": "",
+            "reference": {
+              "p": "https://seclists.org/webappsec/2002/q4/111"
+            },
+            "cweid": 200,
+            "wascid": 13,
+            "sourceid": 27
+          },
+          {
+            "pluginid": 10011,
+            "alertRef": 10011,
+            "alert": "Cookie Without Secure Flag",
+            "name": "Cookie Without Secure Flag",
+            "riskcode": 1,
+            "confidence": 2,
+            "riskdesc": "Low (Medium)",
+            "confidencedesc": "Medium",
+            "desc": {
+              "p": "A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections."
+            },
+            "instances": {
+              "instance": {
+                "uri": "https://petstore.octoperf.com/actions/Catalog.action",
+                "method": "GET",
+                "param": "JSESSIONID",
+                "attack": "",
+                "evidence": "Set-Cookie: JSESSIONID",
+                "otherinfo": ""
+              }
+            },
+            "count": 1,
+            "solution": {
+              "p": "Whenever a cookie contains sensitive information or is a session token, then it should always be passed using an encrypted channel. Ensure that the secure flag is set for cookies containing such sensitive information."
+            },
+            "otherinfo": "",
+            "reference": {
+              "p": "https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html"
+            },
+            "cweid": 614,
+            "wascid": 13,
+            "sourceid": 1
+          },
+          {
+            "pluginid": 10054,
+            "alertRef": "10054-1",
+            "alert": "Cookie without SameSite Attribute",
+            "name": "Cookie without SameSite Attribute",
+            "riskcode": 1,
+            "confidence": 2,
+            "riskdesc": "Low (Medium)",
+            "confidencedesc": "Medium",
+            "desc": {
+              "p": "A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks."
+            },
+            "instances": {
+              "instance": {
+                "uri": "https://petstore.octoperf.com/actions/Catalog.action",
+                "method": "GET",
+                "param": "JSESSIONID",
+                "attack": "",
+                "evidence": "Set-Cookie: JSESSIONID",
+                "otherinfo": ""
+              }
+            },
+            "count": 1,
+            "solution": {
+              "p": "Ensure that the SameSite attribute is set to either 'lax' or ideally 'strict' for all cookies."
+            },
+            "otherinfo": "",
+            "reference": {
+              "p": "https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site"
+            },
+            "cweid": 1275,
+            "wascid": 13,
+            "sourceid": 1
+          },
+          {
+            "pluginid": 10096,
+            "alertRef": 10096,
+            "alert": "Timestamp Disclosure - Unix",
+            "name": "Timestamp Disclosure - Unix",
+            "riskcode": 1,
+            "confidence": 1,
+            "riskdesc": "Low (Low)",
+            "confidencedesc": "Low",
+            "desc": {
+              "p": "A timestamp was disclosed by the application/web server. - Unix"
+            },
+            "instances": {
+              "instance": {
+                "uri": "https://petstore.octoperf.com/actions/Account.action;jsessionid=3D765566F76A2D9C6F628C59E515FA2A?signonForm=",
+                "method": "GET",
+                "param": "",
+                "attack": "",
+                "evidence": 1809357534,
+                "otherinfo": "1809357534, which evaluates to: 2027-05-03 20:48:54."
+              }
+            },
+            "count": 1,
+            "solution": {
+              "p": "Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns."
+            },
+            "otherinfo": {
+              "p": "1809357534, which evaluates to: 2027-05-03 20:48:54."
+            },
+            "reference": {
+              "p": "https://cwe.mitre.org/data/definitions/200.html"
+            },
+            "cweid": 200,
+            "wascid": 13,
+            "sourceid": 27
+          },
+          {
+            "pluginid": 10021,
+            "alertRef": 10021,
+            "alert": "X-Content-Type-Options Header Missing",
+            "name": "X-Content-Type-Options Header Missing",
+            "riskcode": 1,
+            "confidence": 2,
+            "riskdesc": "Low (Medium)",
+            "confidencedesc": "Medium",
+            "desc": {
+              "p": "The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing."
+            },
+            "instances": {
+              "instance": [
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Account.action;jsessionid=3D765566F76A2D9C6F628C59E515FA2A?signonForm=",
+                  "method": "GET",
+                  "param": "x-content-type-options",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type. At \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Catalog.action",
+                  "method": "GET",
+                  "param": "x-content-type-options",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type. At \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Catalog.action?viewCategory=&categoryId=FISH",
+                  "method": "GET",
+                  "param": "x-content-type-options",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type. At \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                  "uri": "https://petstore.octoperf.com/css/jpetstore.css",
+                  "method": "GET",
+                  "param": "x-content-type-options",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type. At \"High\" threshold this scan rule will not alert on client or server error responses."
+                }
+              ]
+            },
+            "count": 4,
+            "solution": {
+              "p": [
+                "Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.",
+                "If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing."
+              ]
+            },
+            "otherinfo": {
+              "p": [
+                "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.",
+                "At \"High\" threshold this scan rule will not alert on client or server error responses."
+              ]
+            },
+            "reference": {
+              "p": [
+                "https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)",
+                "https://owasp.org/www-community/Security_Headers"
+              ]
+            },
+            "cweid": 693,
+            "wascid": 15,
+            "sourceid": 27
+          },
+          {
+            "pluginid": 10111,
+            "alertRef": 10111,
+            "alert": "Authentication Request Identified",
+            "name": "Authentication Request Identified",
+            "riskcode": 0,
+            "confidence": 1,
+            "riskdesc": "Informational (Low)",
+            "confidencedesc": "Low",
+            "desc": {
+              "p": "The given request has been identified as an authentication request. The 'Other Info' field contains a set of key=value lines which identify any relevant fields. If the request is in a context which has an Authentication Method set to \"Auto-Detect\" then this rule will change the authentication to match the request identified."
+            },
+            "instances": {
+              "instance": {
+                "uri": "https://petstore.octoperf.com/actions/Account.action",
+                "method": "POST",
+                "param": "username",
+                "attack": "",
+                "evidence": "password",
+                "otherinfo": "userParam=username userValue=j2ee passwordParam=password referer=https://petstore.octoperf.com/actions/Account.action;jsessionid=3D765566F76A2D9C6F628C59E515FA2A?signonForm="
+              }
+            },
+            "count": 1,
+            "solution": {
+              "p": "This is an informational alert rather than a vulnerability and so there is nothing to fix."
+            },
+            "otherinfo": {
+              "p": [
+                "userParam=username",
+                "userValue=j2ee",
+                "passwordParam=password",
+                "referer=https://petstore.octoperf.com/actions/Account.action;jsessionid=3D765566F76A2D9C6F628C59E515FA2A?signonForm="
+              ]
+            },
+            "reference": {
+              "p": "https://www.zaproxy.org/docs/desktop/addons/authentication-helper/auth-req-id/"
+            },
+            "cweid": -1,
+            "wascid": -1,
+            "sourceid": 28
+          },
+          {
+            "pluginid": 90011,
+            "alertRef": 90011,
+            "alert": "Charset Mismatch (Header Versus Meta Content-Type Charset)",
+            "name": "Charset Mismatch (Header Versus Meta Content-Type Charset)",
+            "riskcode": 0,
+            "confidence": 1,
+            "riskdesc": "Informational (Low)",
+            "confidencedesc": "Low",
+            "desc": {
+              "p": [
+                "This check identifies responses where the HTTP Content-Type header declares a charset different from the charset defined by the body of the HTML or XML. When there's a charset mismatch between the HTTP header and content body Web browsers can be forced into an undesirable content-sniffing mode to determine the content's correct character set.",
+                "",
+                "An attacker could manipulate content on the page to be interpreted in an encoding of their choice. For example, if an attacker can control content at the beginning of the page, they could inject script using UTF-7 encoded text and manipulate some browsers into interpreting that text."
+              ]
+            },
+            "instances": {
+              "instance": [
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Account.action;jsessionid=3D765566F76A2D9C6F628C59E515FA2A?signonForm=",
+                  "method": "GET",
+                  "param": "",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": "There was a charset mismatch between the HTTP Header and the META content-type encoding declarations: [UTF-8] and [windows-1252] do not match."
+                },
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Catalog.action",
+                  "method": "GET",
+                  "param": "",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": "There was a charset mismatch between the HTTP Header and the META content-type encoding declarations: [UTF-8] and [windows-1252] do not match."
+                },
+                {
+                  "uri": "https://petstore.octoperf.com/actions/Catalog.action?viewCategory=&categoryId=FISH",
+                  "method": "GET",
+                  "param": "",
+                  "attack": "",
+                  "evidence": "",
+                  "otherinfo": "There was a charset mismatch between the HTTP Header and the META content-type encoding declarations: [UTF-8] and [windows-1252] do not match."
+                }
+              ]
+            },
+            "count": 3,
+            "solution": {
+              "p": "Force UTF-8 for all text content in both the HTTP header and meta tags in HTML or encoding declarations in XML."
+            },
+            "otherinfo": {
+              "p": "There was a charset mismatch between the HTTP Header and the META content-type encoding declarations: [UTF-8] and [windows-1252] do not match."
+            },
+            "reference": {
+              "p": "https://code.google.com/p/browsersec/wiki/Part2#Character_set_handling_and_detection"
+            },
+            "cweid": 436,
+            "wascid": 15,
+            "sourceid": 27
+          },
+          {
+            "pluginid": 10027,
+            "alertRef": 10027,
+            "alert": "Information Disclosure - Suspicious Comments",
+            "name": "Information Disclosure - Suspicious Comments",
+            "riskcode": 0,
+            "confidence": 1,
+            "riskdesc": "Informational (Low)",
+            "confidencedesc": "Low",
+            "desc": {
+              "p": "The response appears to contain suspicious comments which may help an attacker. Note: Matches made within script blocks or files are against the entire content not only comments."
+            },
+            "instances": {
+              "instance": {
+                "uri": "https://petstore.octoperf.com/actions/Account.action;jsessionid=3D765566F76A2D9C6F628C59E515FA2A?signonForm=",
+                "method": "GET",
+                "param": "",
+                "attack": "",
+                "evidence": "select",
+                "otherinfo": {
+                  "#text": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"",
+                  "script": "setTimeout(function(){try{var z=document.getElementById('stripes-1809357534');z.focus();z.select(\", see evidence field for the suspicious comment/snippet."
+                }
+              },
+              "count": 1,
+              "solution": {
+                "p": "Remove all comments that return information that may help an attacker and fix any underlying problems they refer to."
+              },
+              "otherinfo": {
+                "p": {
+                  "#text": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"",
+                  "script": "setTimeout(function(){try{var z=document.getElementById('stripes-1809357534');z.focus();z.select(\", see evidence field for the suspicious comment/snippet."
+                },
+                "reference": "",
+                "cweid": 200,
+                "wascid": 13,
+                "sourceid": 27
+              },
+              "alertitem": [
+                {
+                  "pluginid": 10015,
+                  "alertRef": 10015,
+                  "alert": "Re-examine Cache-control Directives",
+                  "name": "Re-examine Cache-control Directives",
+                  "riskcode": 0,
+                  "confidence": 1,
+                  "riskdesc": "Informational (Low)",
+                  "confidencedesc": "Low",
+                  "desc": {
+                    "p": "The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached."
+                  },
+                  "instances": {
+                    "instance": [
+                      {
+                        "uri": "https://petstore.octoperf.com/actions/Account.action;jsessionid=3D765566F76A2D9C6F628C59E515FA2A?signonForm=",
+                        "method": "GET",
+                        "param": "cache-control",
+                        "attack": "",
+                        "evidence": "",
+                        "otherinfo": ""
+                      },
+                      {
+                        "uri": "https://petstore.octoperf.com/actions/Catalog.action",
+                        "method": "GET",
+                        "param": "cache-control",
+                        "attack": "",
+                        "evidence": "",
+                        "otherinfo": ""
+                      },
+                      {
+                        "uri": "https://petstore.octoperf.com/actions/Catalog.action?viewCategory=&categoryId=FISH",
+                        "method": "GET",
+                        "param": "cache-control",
+                        "attack": "",
+                        "evidence": "",
+                        "otherinfo": ""
+                      }
+                    ]
+                  },
+                  "count": 3,
+                  "solution": {
+                    "p": "For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\"."
+                  },
+                  "otherinfo": "",
+                  "reference": {
+                    "p": [
+                      "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching",
+                      "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control",
+                      "https://grayduck.mn/2021/09/13/cache-control-recommendations/"
+                    ]
+                  },
+                  "cweid": 525,
+                  "wascid": 13,
+                  "sourceid": 27
+                },
+                {
+                  "pluginid": 10112,
+                  "alertRef": 10112,
+                  "alert": "Session Management Response Identified",
+                  "name": "Session Management Response Identified",
+                  "riskcode": 0,
+                  "confidence": 2,
+                  "riskdesc": "Informational (Medium)",
+                  "confidencedesc": "Medium",
+                  "desc": {
+                    "p": "The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified."
+                  },
+                  "instances": {
+                    "instance": [
+                      {
+                        "uri": "https://petstore.octoperf.com/actions/Catalog.action",
+                        "method": "GET",
+                        "param": "JSESSIONID",
+                        "attack": "",
+                        "evidence": "3D765566F76A2D9C6F628C59E515FA2A",
+                        "otherinfo": "cookie:JSESSIONID"
+                      },
+                      {
+                        "uri": "https://petstore.octoperf.com/actions/Catalog.action",
+                        "method": "GET",
+                        "param": "JSESSIONID",
+                        "attack": "",
+                        "evidence": "BC5F36EB3B4E0AF5893C5929DD127908",
+                        "otherinfo": "cookie:JSESSIONID"
+                      }
+                    ]
+                  },
+                  "count": 2,
+                  "solution": {
+                    "p": "This is an informational alert rather than a vulnerability and so there is nothing to fix."
+                  },
+                  "otherinfo": {
+                    "p": [
+                      "",
+                      "cookie:JSESSIONID"
+                    ]
+                  },
+                  "reference": {
+                    "p": "https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id"
+                  },
+                  "cweid": -1,
+                  "wascid": -1,
+                  "sourceid": 1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
